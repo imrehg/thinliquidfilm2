@@ -1,0 +1,10 @@
+[Desktop Action thinliquidfilm]
+Exec=thinliquidfilm %U
+Icon=package_multimedia
+Name=Add to thinliquidfilm
+
+[Desktop Entry]
+Actions=thinliquidfilm
+Icon=package_multimedia
+Name=add2thinliquidfilm
+ServiceTypes=video/*
