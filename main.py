@@ -2677,9 +2677,7 @@ class main(QDialog):
             total_frames += frames_count
         self.prog_dialog = QProgressDialog("Encoding ...", "Cancel Encoding",  total_frames, self, "progress", True)
         j = 0
-        regexp = r'''(?isx)
-        .*?frame=\s*?(?P<frames>\d*?)\sq=
-        '''
+        regexp = r'''(?isx).*?frame=\s*?(?P<frames>\d*?)\sfps='''
         cancelled = 0
         resultmessage = "The following files were successfully encoded:\n\n"
         for i in range(len(self.encodeSettings)):
