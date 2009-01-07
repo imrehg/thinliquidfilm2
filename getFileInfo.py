@@ -3,7 +3,7 @@ import re
 
 def getInfo(file):
     try:
-        cmd = ('ffmpeg -i "%s" -vframes 10 -vcodec mpeg4 -r 29.970030 -b 768 -ar 24000 -ab 128 -s 320x192 /dev/null' %(file))
+        cmd = ('ffmpeg -i "%s" -vframes 10 -vcodec mpeg4 -r 29.970030 -b 768k -ar 24000 -ab 128k -s 320x180 -f avi - > /dev/null' %(file))
         output = commands.getoutput(cmd)
         print output
         regexp = r'''(?isx)

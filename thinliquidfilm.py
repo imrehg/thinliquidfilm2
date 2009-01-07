@@ -30,16 +30,16 @@ if __name__ == "__main__":
     else:
         print 'ffmpeg does not support xvid.  thin liquid film will not be able to read or encode xvid video files.'
         codec_errors += 1
-    match = re.findall('h264', output)
+    match = re.findall('libx264', output)
     if len(match) > 0:
-        print 'ffmpeg supports h264'
-        f.comboCodec.insertItem('h264',-1)
+        print 'ffmpeg supports x264'
+        f.comboCodec.insertItem('libx264',-1)
     else:
-        print 'ffmpeg does not support h264.  thin liquid film will not be able to read or encode h264 video files.'
+        print 'ffmpeg does not support x264.  thin liquid film will not be able to read or encode x264 video files.'
         codec_errors += 1
     if codec_errors == 2:
-        print "ffmpeg does not support either xvid or h264.  thin liquid film will not work without one of those codecs being supported by ffmpeg.  thin liquid film will exit."
-        os.system('kdialog --title "FFMPEG dependency failure" --error "ffmpeg does not support either xvid or h264.  thin liquid film will not work without one of those codecs being supported by ffmpeg.  thin liquid film will exit."')
+        print "ffmpeg does not support either xvid or x264.  thin liquid film will not work without one of those codecs being supported by ffmpeg.  thin liquid film will exit."
+        os.system('kdialog --title "FFMPEG dependency failure" --error "ffmpeg does not support either xvid or x264.  thin liquid film will not work without one of those codecs being supported by ffmpeg.  thin liquid film will exit."')
         sys.exit()
     f.home_directory = os.popen("echo $HOME").readline()[0:-1]
     f.config_directory = f.home_directory + '/.thinliquidfilm'

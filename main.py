@@ -2689,22 +2689,25 @@ class main(QDialog):
             infile = infile_raw[-1]
             self.prog_dialog.setLabelText('Encoding ' + infile + '...')
             if self.encodeSettings[i][2] == 1:
-                maxrate = '1500'
-                bitrate = '1100'
+                maxrate = '1500k'
+                bitrate = '1100k'
             else:
-                maxrate = '768'
-                bitrate = '600'
+                maxrate = '768k'
+                bitrate = '600k'
             output_raw = self.file_paths[i].split('/')
             output_raw = output_raw[-1].split('.')
             if self.encodeSettings[i][3] == 'xvid':
                 output_raw[-1] = 'mp4'
                 h264_opts = '-maxrate %s -b %s -qmin 3 -qmax 5 -g 300' %(maxrate,bitrate)
+            elif self.encodeSettings[i][3] == 'libx264':
+                output_raw[-1] = 'mp4'
+                h264_opts = '-maxrate %s -flags +loop -cmp +chroma -partitions +parti4x4+partp4x4+partp8x8+partp8x8 -flags2 +mixed_refs -level 13 -refs 3 -subq 7 -trellis 2 -me full -g 300' %(maxrate)
             else:
                 output_raw[-1] = 'mov'
                 h264_opts = '-maxrate %s -flags +loop -cmp +chroma -partitions +parti4x4+partp4x4+partp8x8+partp8x8 -flags2 +mixed_refs -level 13 -refs 3 -subq 7 -trellis 2 -me full -g 300' %(maxrate)
             out_file = '.'.join(output_raw)
             if self.encodeSettings[i][0] == '1':
-                ffmpegPipe = os.popen('ffmpeg -y -i "%s" -vcodec %s %s -acodec aac -ab %s -ar 48000 -ac 2 -s %s "%s" &> %s' %(self.file_paths[i],self.encodeSettings[i][3],h264_opts,self.encodeSettings[i][4],self.encodeSettings[i][1][self.encodeSettings[i][2]],self.encodeSettings[i][5] + '/' + out_file, logfile))
+                ffmpegPipe = os.popen('ffmpeg -y -i "%s" -vcodec %s %s -acodec libfaac -ab %s -ar 48000 -ac 2 -s %s "%s" &> %s' %(self.file_paths[i],self.encodeSettings[i][3],h264_opts,self.encodeSettings[i][4],self.encodeSettings[i][1][self.encodeSettings[i][2]],self.encodeSettings[i][5] + '/' + out_file, logfile))
                 running = 0
                 time.sleep(1)
                 file = open(logfile,'r')
