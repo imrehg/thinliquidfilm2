@@ -2699,10 +2699,10 @@ class main(QDialog):
                 h264_opts = '-maxrate %s -b %s -qmin 3 -qmax 5 -g 300' %(maxrate,bitrate)
             elif self.encodeSettings[i][3] == 'libx264':
                 output_raw[-1] = 'mp4'
-                h264_opts = '-maxrate %s -flags +loop -cmp +chroma -partitions +parti4x4+partp4x4+partp8x8+partp8x8 -flags2 +mixed_refs -level 13 -refs 3 -subq 7 -trellis 2 -me full -g 300' %(maxrate)
+                h264_opts = '-maxrate %s -flags +loop -cmp +chroma -partitions +parti4x4+partp4x4+partp8x8+partp8x8 -flags2 +mixed_refs -level 13 -refs 3 -subq 7 -trellis 2 -me_method full -g 300' %(maxrate)
             else:
                 output_raw[-1] = 'mov'
-                h264_opts = '-maxrate %s -flags +loop -cmp +chroma -partitions +parti4x4+partp4x4+partp8x8+partp8x8 -flags2 +mixed_refs -level 13 -refs 3 -subq 7 -trellis 2 -me full -g 300' %(maxrate)
+                h264_opts = '-maxrate %s -flags +loop -cmp +chroma -partitions +parti4x4+partp4x4+partp8x8+partp8x8 -flags2 +mixed_refs -level 13 -refs 3 -subq 7 -trellis 2 -me_method full -g 300' %(maxrate)
             out_file = '.'.join(output_raw)
             if self.encodeSettings[i][0] == '1':
                 ffmpegPipe = os.popen('ffmpeg -y -i "%s" -vcodec %s %s -acodec libfaac -ab %s -ar 48000 -ac 2 -s %s "%s" &> %s' %(self.file_paths[i],self.encodeSettings[i][3],h264_opts,self.encodeSettings[i][4],self.encodeSettings[i][1][self.encodeSettings[i][2]],self.encodeSettings[i][5] + '/' + out_file, logfile))
@@ -3520,7 +3520,7 @@ class main(QDialog):
             h264_opts = '-maxrate %s -b %s -qmin 3 -qmax 5 -g 300' %(maxrate,bitrate)
         else:
             out_file = self.config_directory + '/preview.mov'
-            h264_opts = '-maxrate %s -flags +loop -cmp +chroma -partitions +parti4x4+partp4x4+partp8x8+partp8x8 -flags2 +mixed_refs -level 13 -refs 3 -subq 7 -trellis 2 -me full -g 300' %(maxrate)
+            h264_opts = '-maxrate %s -flags +loop -cmp +chroma -partitions +parti4x4+partp4x4+partp8x8+partp8x8 -flags2 +mixed_refs -level 13 -refs 3 -subq 7 -trellis 2 -me_method full -g 300' %(maxrate)
         if self.encodeSettings[i][0] == '1':
             os.system('ffmpeg -y -i "%s" -vframes %s -vcodec %s %s -acodec aac -ab %s -ar 48000 -ac 2 -s %s "%s" &> %s' %(self.file_paths[i],vframes,self.encodeSettings[i][3],h264_opts,self.encodeSettings[i][4],self.encodeSettings[i][1][self.encodeSettings[i][2]], out_file, logfile))
         else:
